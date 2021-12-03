@@ -34,12 +34,13 @@ for (i,s) in agrupados.iterrows():
 		str(s['Título do trabalho']). \
 		replace('/', '-'). \
 		replace(':', '-'). \
-		replace('"',''). \
+		replace('\"',''). \
 		replace("'",''). \
 		replace(' ', '-'). \
 		replace(',','-'). \
 		replace('\\','-'). \
-		replace('.','')[:25]
+		replace('.',''). \
+		strip(chr(34))[:25]
 
 	file_name = unidecode.unidecode(file_name)
 
@@ -91,12 +92,13 @@ for (i,s) in df.iterrows():
 		str(s['Título']). \
 		replace('/', '-'). \
 		replace(':', '-'). \
-		replace('"',''). \
+		replace('\"',''). \
 		replace("'",''). \
 		replace(' ', '-'). \
 		replace(',','-'). \
 		replace('\\','-'). \
-		replace('.','')[:25]
+		replace('.',''). \
+		strip(chr(34))[:25]
 		
 	file_name += '}' + '\n\n'
 
@@ -104,7 +106,7 @@ for (i,s) in df.iterrows():
 
 	aux.append([texto,
 		str('\includepdf' + \
-			'{' + 'pdfs/{0}.pdf'.format(file_name)
+			'{' + 'pdfs/{0}'.format(file_name)
 		)
 	])
 			
