@@ -1,4 +1,3 @@
-from numpy.core.numeric import False_
 import pandas as pd
 import wget
 import os
