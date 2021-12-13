@@ -34,7 +34,7 @@ for (i,s) in agrupados.iterrows():
 		str(s['Título do trabalho']). \
 		replace('/', '-'). \
 		replace(':', '-'). \
-		replace('\"',''). \
+		replace("\"",''). \
 		replace("'",''). \
 		replace(' ', '-'). \
 		replace(',','-'). \
@@ -44,14 +44,25 @@ for (i,s) in agrupados.iterrows():
 
 	file_name = unidecode.unidecode(file_name)
 
+	count = 0
+	while '"' in file_name:
+		count += 1
+
+		if count > 1:
+			print('ERRO NA CONVERSAO DE NOME')
+			exit(1)
+
+		auxstr = ''
+		for c in file_name:
+			if c != '"':
+				auxstr += c
+
+		file_name = auxstr
+	
 	print(
 	s['Trabalho completo'], '\nSalvando como (./arquivos/): {0}.{1}'.format(
 	file_name, file_format))
 
-	if '"' in file_name:
-		print('ERRO NA CONVERSAO DE NOME')
-		exit(1)
-		
 	try:
 		if not os.path.exists('../arquivos/{0}.{1}'.format(file_name,file_format)):
 			wget.download(s['Trabalho completo'], '../arquivos/{0}.{1}'.format(
@@ -74,6 +85,7 @@ for (i,s) in agrupados.iterrows():
 	row['Título'] = str(s['Título do trabalho'])
 	row['Autores'] = str(s['Nome do participante']) + \
 		', ' + str(s['Coautores do trabalho'])
+	row['Resumo'] = str(s['Resumo do trabalho'])
 	
 	l.append(row)
 
@@ -86,7 +98,7 @@ aux = []
 
 for (i,s) in df.iterrows():
 	title = '{' + s['Título'] + '}'
-	texto = "\section{0}\n\n{1}\n\n".format(title,s['Autores'])
+	texto = "\section{0}\n\n{1}\n\n{2}\n\n".format(title,s['Autores'],s['Resumo'])
 
 	file_name = \
 		str(s['Título']). \
@@ -103,6 +115,21 @@ for (i,s) in df.iterrows():
 	file_name += '}' + '\n\n'
 
 	file_name = unidecode.unidecode(file_name)
+
+	count = 0
+	while '"' in file_name:
+		count += 1
+
+		if count > 1:
+			print('ERRO NA CONVERSAO DE NOME')
+			exit(1)
+
+		auxstr = ''
+		for c in file_name:
+			if c != '"':
+				auxstr += c
+
+		file_name = auxstr
 
 	aux.append([texto,
 		str('\includepdf' + \
