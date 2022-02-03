@@ -82,7 +82,7 @@ if not os.path.exists('../out'):
 l = []
 for (i,s) in agrupados.iterrows():
 	row = {}
-	row['Título'] = str(s['Título do trabalho'])
+	row['Título'] = str(s['Título do trabalho']).title()
 	row['Autores'] = str(s['Nome do participante']) + \
 		', ' + str(s['Coautores do trabalho'])
 	row['Resumo'] = str(s['Resumo do trabalho'])
@@ -98,7 +98,9 @@ aux = []
 
 for (i,s) in df.iterrows():
 	title = '{' + s['Título'] + '}'
-	texto = "\section{0}\n\n{1}\n\n{2}\n\n".format(title,s['Autores'],s['Resumo'])
+	texto = '\\addcontentsline{toc}{section}' + \
+		"{0}\n\n\section*{0}\n\n{1}\n\n{2}\n\n".\
+		format(title,s['Autores'],s['Resumo'])
 
 	file_name = \
 		str(s['Título']). \
