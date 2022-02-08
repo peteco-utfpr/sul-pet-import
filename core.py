@@ -93,7 +93,7 @@ for (i,s) in agrupados.iterrows():
 	title = '{' + s['Título do trabalho'] + '}'
 	
 	texto = str('\\addcontentsline{toc}{section}' + \
-		'{0}\n'.format(title))
+		'{0}\n'.format(title.upper()))
 
 	file_name = format_file_name(str(s['Título do trabalho']))
 
