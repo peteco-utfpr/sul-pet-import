@@ -99,7 +99,7 @@ for (i,s) in agrupados.iterrows():
 
 	tex_text.append([texto,
 		str('\includepdf' + \
-			'{' + 'pdfs/{0}\n\n'.format(file_name)
+			'{' + 'pdfs/{0}'.format(file_name) + '}\n\n'
 		)
 	])
 			
