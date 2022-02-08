@@ -98,7 +98,7 @@ for (i,s) in agrupados.iterrows():
 	file_name = format_file_name(str(s['Título do trabalho']))
 
 	tex_text.append([texto,
-		str('\includepdf' + \
+		str('\includepdf[pagecommand={}]' + \
 			'{' + 'pdfs/{0}'.format(file_name) + '}\n\n'
 		)
 	])
